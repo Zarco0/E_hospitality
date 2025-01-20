@@ -1,0 +1,45 @@
+{% extends 'doctors/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center text-primary">Manage Profile</h2>
+    <form method="post" enctype="multipart/form-data" class="p-4 shadow-sm bg-light">
+        {% csrf_token %}
+
+        <!-- Username -->
+        <div class="mb-3">
+            <label for="username" class="form-label">Username:</label>
+            {{ form.username }}
+        </div>
+
+        <!-- Email -->
+        <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            {{ form.email }}
+        </div>
+
+        <!-- Profile Picture -->
+        {% if user.profile_picture %}
+        <div class="mb-3">
+            <label class="form-label">Current Profile Picture:</label>
+            <div>
+                <img src="{{ user.profile_picture.url }}" alt="Profile Picture" class="rounded-circle" style="width: 150px; height: 150px;">
+            </div>
+        </div>
+        {% endif %}
+        <div class="mb-3">
+            <label for="profile_picture" class="form-label">Upload New Profile Picture:</label>
+            {{ form.profile_picture }}
+        </div>
+
+        <!-- Specialization -->
+        <div class="mb-3">
+            <label for="specialization" class="form-label">Specialization:</label>
+            {{ form.specialization }}
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary w-100">Save Changes</button>
+    </form>
+</div>
+{% endblock %}

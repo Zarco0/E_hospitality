@@ -1,0 +1,26 @@
+.accordion {
+    border: 1px solid #e7e7e7;
+    background-color: #f9f9f9;
+}
+
+.accordion-button {
+    font-weight: bold;
+    background-color: #f8f9fa;
+}
+
+.accordion-button:hover {
+    background-color: #e9ecef;
+    color: #0056b3;
+}
+
+.accordion-body {
+    background-color: #ffffff;
+}
+
+.list-group-item a {
+    transition: color 0.3s;
+}
+
+.list-group-item a:hover {
+    color: #0056b3;
+}

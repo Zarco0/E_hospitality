@@ -1,0 +1,88 @@
+{% extends 'patients/base.html' %}
+
+{% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-danger" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<div class="container py-4">    
+    <!-- Page Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-primary">Book an Appointment</h2>
+        <a href="{% url 'accounts:patient_dashboard' %}" class="btn btn-outline-primary">
+            <i class="bi bi-arrow-left-short"></i> Dashboard
+        </a>
+    </div>
+
+    <!-- Form Section -->
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <!-- Doctor Selection -->
+                <div class="mb-3">
+                    <label for="id_doctor" class="form-label"><b>Select a Doctor</b></label>
+                    <select name="doctor" id="id_doctor" class="form-select">
+                        <option value="">Choose a Doctor</option>
+                        {% for doctor in doctors %}
+                            <option value="{{ doctor.id }}">{{ doctor.username }} -> {{ doctor.specialization }}</option>
+                        {% endfor %}
+                    </select>
+                    {% if form.doctor.errors %}
+                        <div class="text-danger mt-1">
+                            {% for error in form.doctor.errors %}
+                                <p class="small">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Appointment Date and Time -->
+                <div class="mb-3">
+                    <label for="id_date" class="form-label"><b>Appointment Date and Time</b></label>
+                    <input type="datetime-local" name="date" id="id_date" class="form-control" required>
+                    {% if form.date.errors %}
+                        <div class="text-danger mt-1">
+                            {% for error in form.date.errors %}
+                                <p class="small">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Reason for Appointment -->
+                <div class="mb-3">
+                    <label for="id_reason" class="form-label"><b>Reason for Appointment</b></label>
+                    <textarea name="reason" id="id_reason" class="form-control" rows="4" placeholder="Briefly explain your reason" required></textarea>
+                    {% if form.reason.errors %}
+                        <div class="text-danger mt-1">
+                            {% for error in form.reason.errors %}
+                                <p class="small">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Appointment Fee -->
+                <div class="mb-3">
+                    <label class="form-label"><b>Appointment Fee</b></label>
+                    <p class="form-control-static text-primary"><b>{{appointment_fee}}₹</b></p> 
+                </div>
+
+                <!-- Submit Button -->
+                <div class="text-end">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-calendar-check"></i> Book Appointment
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

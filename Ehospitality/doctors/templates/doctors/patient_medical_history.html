@@ -1,0 +1,76 @@
+{% extends 'doctors/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Medical History for {{ patient.username }}</h1>
+    <a href="{% url 'doctors:doctor_appointments' %}" class="btn btn-outline-primary mb-4"><i class="bi bi-arrow-left-short"></i>Back</a>
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h3 class="text-primary">Diagnoses</h3>
+            {% if medical_history.diagnoses.all %}
+                <ul class="list-group">
+                    {% for diagnosis in medical_history.diagnoses.all %}
+                        <li class="list-group-item">
+                            {{ diagnosis.name }} (Diagnosed on: {{ diagnosis.date }})
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-muted">No diagnoses found.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h3 class="text-primary">Medications</h3>
+            {% if medical_history.medications.all %}
+                <ul class="list-group">
+                    {% for medication in medical_history.medications.all %}
+                        <li class="list-group-item">
+                            {{ medication.name }} (Dosage: {{ medication.dosage }})
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-muted">No medications found.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h3 class="text-primary">Allergies</h3>
+            {% if medical_history.allergies.all %}
+                <ul class="list-group">
+                    {% for allergy in medical_history.allergies.all %}
+                        <li class="list-group-item">
+                            {{ allergy.name }} (Severity: {{ allergy.severity }})
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-muted">No allergies found.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h3 class="text-primary">Treatments</h3>
+            {% if medical_history.treatments.all %}
+                <ul class="list-group">
+                    {% for treatment in medical_history.treatments.all %}
+                        <li class="list-group-item">
+                            {{ treatment.name }} (Result: {{ treatment.result }}) - Treated on: {{ treatment.date }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-muted">No treatments found.</p>
+            {% endif %}
+        </div>
+    </div>
+
+</div>
+{% endblock %}

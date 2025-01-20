@@ -1,0 +1,13 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+<body>
+    <h2>Assign Admin Role</h2>
+    <p>Assign Admin role to {{ user.username }}?</p>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Confirm</button>
+    </form>
+
+
+    {% endblock %}

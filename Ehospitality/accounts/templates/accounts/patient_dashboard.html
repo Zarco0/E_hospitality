@@ -1,0 +1,103 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+{% load static %}
+
+<!-- Include custom CSS -->
+<link rel="stylesheet" href="{% static 'patient/css/patient_dash.css' %}">
+
+<div class="container-fluid mt-5">
+    <!-- Flash Messages -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-danger" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+   
+
+    <!-- Dashboard Navigation -->
+    <div class="row">
+        <div class="col-lg-3 col-md-4">
+            <!-- Sidebar Navigation -->
+            <nav class="nav flex-column shadow-sm p-3 bg-white rounded">
+                <a href="{% url 'patient:appointments' %}" class="nav-link btn btn-outline-primary mb-2 text-start">
+                    <i class="bi bi-calendar-check"></i> View Appointments
+                </a>
+                <a href="{% url 'patient:book_appointment' %}" class="nav-link btn btn-outline-primary mb-2 text-start">
+                    <i class="bi bi-calendar-plus"></i> Book Appointment
+                </a>
+                <a href="{% url 'patient:view_facilities' %}" class="nav-link btn btn-outline-primary mb-2 text-start">
+                    <i class="bi bi-building"></i> View Facilities
+                </a>
+
+                    <a href="{% url 'patient:list_billings' %}" class="nav-link btn btn-outline-primary mb-2 text-start">
+                        <i class="bi bi-receipt"></i> View Billing
+                    </a>
+
+                <a href="{% url 'patient:medical_history' %}" class="nav-link btn btn-outline-primary mb-2 text-start">
+                    <i class="bi bi-file-medical"></i> View Medical History
+                </a>
+                <a href="{% url 'patient:view_resources' %}" class="nav-link btn btn-outline-primary mb-2 text-start">
+                    <i class="bi bi-book"></i> Health Resources
+                </a>
+            </nav>
+        </div>
+
+        <!-- Main Dashboard Content -->
+        <div class="col-lg-9 col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h3>Welcome, {{ user.username }}</h3>
+                </div>
+                <div class="card-body">
+                    
+                    <!-- Dynamic Content Section -->
+                    <div class="mt-4">
+                        <h5 class="text-secondary">Your Overview:</h5>
+                        <ul class="list-group">
+                            <!-- Display the next appointment -->
+                            {% if appointment %}
+                                <li class="list-group-item">
+                                    <strong>Next Appointment:</strong><br>
+                                    Doctor: Dr. {{ appointment.doctor.username }}<br>
+                                    Date: {{ next_appointment.date|date:"D, M d, Y" }}<br>
+                                    Time: {{ next_appointment.time }}
+                                </li>
+                            {% else %}
+                                <li class="list-group-item">No upcoming appointments.</li>
+                            {% endif %}
+
+                            <!-- Display outstanding bills -->
+                            {% if outstanding_bills %}
+                                <li class="list-group-item">
+                                    <strong>Outstanding Bills:</strong><br>
+                                    Total: ₹{{ outstanding_bills.total_amount }}<br>
+                                    Due Date: {{ outstanding_bills.due_date|date:"D, M d, Y" }}
+                                </li>
+                            {% else %}
+                                <li class="list-group-item">No outstanding bills.</li>
+                            {% endif %}
+
+                            <!-- Display recent prescription -->
+                            {% if recent_prescription %}
+                                <li class="list-group-item">
+                                    <strong>Recent Prescription:</strong><br>
+                                    Medications: {{ recent_prescription.medications }}<br>
+                                    Instructions: {{ recent_prescription.instructions }}<br>
+                                    Date: {{ recent_prescription.date|date:"D, M d, Y" }}
+                                </li>
+                            {% else %}
+                                <li class="list-group-item">No recent prescriptions.</li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'patients/base.html' %}
+
+{% block content %}
+
+<h2>Billing Information for Appointment</h2>
+
+<p>Appointment Date: {{ appointment.date }}</p>
+<p>Amount: ${{ billing.amount }}</p>
+<p>Payment Status: {{ billing.payment_status }}</p>
+{% if billing.payment_status == 'pending' %}
+    <p><a href="{% url 'patient:pay_bill' billing.id %}" class="btn btn-primary">Pay Now</a></p>
+{% else %}
+    <p>Payment is already completed.</p>
+{% endif %}
+
+
+{% endblock %}

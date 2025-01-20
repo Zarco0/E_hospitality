@@ -1,0 +1,25 @@
+{% extends 'admins/base.html' %}
+{% block content %}
+<h2>Manage Departments</h2>
+<a href="{% url 'admins:add_department' %}" class="btn btn-primary">Add Department</a>
+<table class="table mt-4">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Location</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for department in departments %}
+        <tr>
+            <td>{{ department.name }}</td>
+            <td>{{ department.location.name }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="2" class="text-center text-muted">No departments found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

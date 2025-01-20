@@ -1,0 +1,43 @@
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .navbar-nav .nav-link {
+            font-size: 1.1rem;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+        .navbar-nav .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+        .navbar-toggler {
+            border: none;
+        }
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+        .footer {
+            background-color: #f8f9fa;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        .profile-picture {
+            width: 20px; /* Set the desired width */
+            height: 20px; /* Set the desired height */
+            border-radius: 50%; /* Optional: Makes the picture circular */
+            object-fit: cover; /* Ensures the image fits within the dimensions */
+            margin-right: 5px; /* Adds some space between the image and the username */
+        }
+        
+
+        .nav-link .username {
+            vertical-align: middle;
+            font-weight: 500;
+        }
+        
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }

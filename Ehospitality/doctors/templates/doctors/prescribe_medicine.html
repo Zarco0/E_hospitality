@@ -1,0 +1,43 @@
+{% extends 'doctors/base.html' %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'doctor/css/prescribe.css' %}">
+
+<div class="container mt-5">
+    <!-- Page Header -->
+    <h1 class="page-title">Prescribe Medication</h1>
+    <a href="{% url 'doctors:doctor_appointments' %}" class="btn btn-outline-primary mb-4"><i class="bi bi-arrow-left-short"></i>Back</a>
+    
+    <p class="appointment-info">Appointment with <strong>{{ appointment.patient.username }}</strong> on <strong>{{ appointment.date }}</strong></p>
+    
+    <!-- Prescription Form -->
+    <div class="form-container">
+        <form method="post">
+            {% csrf_token %}
+            
+            <!-- Medications Input -->
+            <div class="form-group">
+                <label for="medications" class="form-label">Medications</label>
+                <textarea name="medications" id="medications" class="form-input" rows="5" placeholder="Enter the prescribed medications here..."></textarea>
+            </div>
+            
+            <!-- Instructions Input -->
+            <div class="form-group">
+                <label for="instructions" class="form-label">Instructions</label>
+                <textarea name="instructions" id="instructions" class="form-input" rows="3" placeholder="Enter any special instructions here..."></textarea>
+            </div>
+            
+            <!-- Submit Button -->
+            <div class="submit-btn-container">
+                <button type="submit" class="submit-btn">Save Prescription</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_css %}
+
+{% endblock %}

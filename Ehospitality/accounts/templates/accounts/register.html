@@ -1,0 +1,51 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+<div class="container-fluid py-1">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6"> <!-- Increased column width -->
+            <div class="card shadow-lg border-0 rounded-3">
+                <div class="card-body p-4">
+                    <h3 class="text-center mb-4 text-primary"><i class="bi bi-person-plus"></i> Register</h3>
+                    
+                    <!-- Registration Form -->
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        <!-- Form Fields -->
+                        <div class="mb-3">
+                            {{ form.as_p }}
+                        </div>
+
+                        <!-- Non-field Errors -->
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger mt-2">
+                                {% for error in form.non_field_errors %}
+                                    <p>{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+
+                        <!-- General Messages -->
+                        {% if messages %}
+                            <div class="alert alert-danger mt-2">
+                                {% for message in messages %}
+                                    <p>{{ message }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn btn-primary w-100 py-2 mt-3">Register</button>
+                    </form>
+
+                    <!-- Login Link -->
+                    <div class="text-center mt-3">
+                        <p class="text-muted">Already have an account? <a href="{% url 'accounts:login' %}" class="text-primary fw-bold">Login</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

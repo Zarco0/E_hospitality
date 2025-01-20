@@ -1,0 +1,36 @@
+/* Card styling to add smooth border radius */
+.card {
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+/* Input field styling to make the date-time picker more user-friendly */
+input[type="datetime-local"] {
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+/* Button hover effects */
+.btn-success:hover {
+    background-color: #28a745;
+    border-color: #218838;
+    transform: scale(1.05);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Styling for the form inside the card */
+.card-body {
+    padding: 2rem;
+}
+
+/* Centering the title */
+h1, .card-title {
+    font-weight: 700;
+}
+
+/* Margin for spacing between card and heading */
+.mb-4 {
+    margin-bottom: 1.5rem;
+}

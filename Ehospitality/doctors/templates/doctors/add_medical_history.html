@@ -1,0 +1,44 @@
+{% extends 'doctors/base.html' %}
+
+{% block content %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'doctor/css/addmedHistory.css' %}">
+
+<div class="container mt-5">
+    <h3 class="text-center mb-4">Add Medical for {{ patient.username }}</h3>
+
+    <form method="POST" class="bg-light p-4 rounded shadow-sm">
+        {% csrf_token %}
+        
+        <div class="form-group mb-4">
+            <h5>Add Diagnosis</h5>
+            <input type="text" name="diagnosis_name" placeholder="Diagnosis Name" class="form-control" required>
+            <input type="date" name="diagnosis_date" placeholder="Date" class="form-control mt-2" required>
+        </div>
+        
+        <div class="form-group mb-4">
+            <h5>Add Medication</h5>
+            <input type="text" name="medication_name" placeholder="Medication Name" class="form-control" required>
+            <input type="text" name="medication_dosage" placeholder="Dosage" class="form-control mt-2" required>
+        </div>
+        
+        <div class="form-group mb-4">
+            <h5>Add Allergy</h5>
+            <input type="text" name="allergy_name" placeholder="Allergy Name" class="form-control" required>
+            <input type="text" name="allergy_severity" placeholder="Severity" class="form-control mt-2" required>
+        </div>
+        
+        <div class="form-group mb-4">
+            <h5>Add Treatment</h5>
+            <input type="text" name="treatment_name" placeholder="Treatment Name" class="form-control" required>
+            <input type="date" name="treatment_date" placeholder="Date" class="form-control mt-2" required>
+            <input type="text" name="treatment_result" placeholder="Result" class="form-control mt-2" required>
+        </div>
+        
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary btn-lg">Save Medical History</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

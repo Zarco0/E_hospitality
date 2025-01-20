@@ -1,0 +1,41 @@
+{% extends 'patients/base.html' %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'patient/css/health.css' %}">
+<h1>Health Education Resources</h1>
+
+<!-- Search and Filter -->
+<form method="get">
+    <input type="text" name="search" placeholder="Search resources..." value="{{ request.GET.search }}">
+    <select name="category">
+        <option value="">All Categories</option>
+        <option value="Nutrition">Nutrition</option>
+        <option value="Mental Health">Mental Health</option>
+        <option value="Exercise">Exercise</option>
+    </select>
+    <button type="submit">Search</button>
+</form>
+
+<hr>
+
+<!-- Resources List -->
+<div class="resource-list">
+    {% for resource in resources %}
+        <div class="resource-card">
+            <h2>{{ resource.title }}</h2>
+            <p><b>Category:</b> {{ resource.category }}</p>
+            <p><b>Type:</b> {{ resource.get_resource_type_display }}</p>
+            <p>{{ resource.description|truncatewords:20 }}</p>
+            {% if resource.file_or_link %}
+                <a href="{{ resource.file_or_link }}" target="_blank">View Resource</a>
+            {% endif %}
+            {% if resource.downloadable_file %}
+                <a href="{{ resource.downloadable_file.url }}" download>Download</a>
+            {% endif %}
+        </div>
+    {% empty %}
+        <p>No resources available.</p>
+    {% endfor %}
+</div>
+{% endblock %}

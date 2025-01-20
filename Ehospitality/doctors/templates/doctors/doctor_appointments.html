@@ -1,0 +1,56 @@
+{% extends 'doctors/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <!-- Page Header -->
+    <h1 class="text-center text-primary mb-4">Your Appointments</h1>
+    
+    <!-- Search Form -->
+    <div class="row justify-content-center mb-4">
+        <div class="col-md-6">
+            <form method="get" action="" class="d-flex">
+                <input type="text" name="search" class="form-control me-2" placeholder="Search patients" value="{{ request.GET.search }}">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Appointment Table -->
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover">
+            <thead class="table-light text-center">
+                <tr>
+                    <th>Patient</th>
+                    <th>Appointment Time</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody class="text-center">
+                {% for appointment in appointments %}
+                <tr>
+                    <td>{{ appointment.patient.username }}</td>
+                    <td>{{ appointment.date }}</td>
+                    <td>
+                        <span class="badge {% if appointment.status == 'Completed' %}bg-success{% elif appointment.status == 'Pending' %}bg-warning{% else %}bg-danger{% endif %}">
+                            {{ appointment.status }}
+                        </span>
+                    </td>
+                    <td>
+                        <a href="{% url 'doctors:prescribe_medicine' appointment.id %}" class="btn btn-success btn-sm">Prescribe</a>
+                        <a href="{% url 'doctors:patient_medical_history' appointment.patient.id %}" class="btn btn-info btn-sm">View History</a>
+                        <a href="{% url 'doctors:add_medical_history' appointment.patient.id %}" class="btn btn-primary btn-sm">Add Medical</a>
+                        <a href="{% url 'doctors:prescription_history' appointment.patient.id %}" class="btn btn-warning btn-sm">Past Presciptions</a>
+
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" class="text-center text-muted">No appointments found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

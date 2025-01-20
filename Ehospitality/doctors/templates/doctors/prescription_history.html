@@ -1,0 +1,36 @@
+{% extends 'doctors/base.html' %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Prescription History for {{ patient.username }}</h1>
+        
+        <!-- Button to add a new prescription -->
+        <a href="{% url 'doctors:doctor_appointments' %}" class="btn btn-outline-primary mb-4"><i class="bi bi-arrow-left-short"></i>Back</a>
+
+        <!-- Prescription History Card -->
+        <div class="card shadow-lg">
+            <div class="card-header bg-primary text-white">
+                <h3 class="card-title text-center">Prescribed Medications</h3>
+            </div>
+            <div class="card-body">
+                <!-- Checking if prescriptions are available -->
+                {% if prescriptions %}
+                    <div class="list-group">
+                        {% for prescription in prescriptions %}
+                            <div class="list-group-item mb-3">
+                                <h5 class="mb-2"><strong>Medications:</strong> {{ prescription.medications }}</h5>
+                                <p><strong>Instructions:</strong> {{ prescription.instructions }}</p>
+                                <p><strong>Prescribed on:</strong> {{ prescription.date|date:"F j, Y" }}</p>
+                                <p><strong>Prescribed by:</strong> Dr. {{ prescription.doctor.username }}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="alert alert-warning" role="alert">
+                        No prescriptions found for this patient.
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

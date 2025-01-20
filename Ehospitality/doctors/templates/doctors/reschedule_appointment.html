@@ -1,0 +1,39 @@
+{% extends 'doctors/base.html' %}
+
+{% block content %}
+
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'doctor/css/reschedule.css' %}">
+
+    <div class="container py-5">
+        <h1 class="text-center text-primary mb-4">Reschedule Appointment for <b>{{ appointment.patient.username }}</b></h1>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <h5 class="card-title text-center text-secondary">Please select a new appointment date and time</h5>
+                        
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="mb-4">
+                                <label for="new_date" class="form-label">New Appointment Date:</label>
+                                <input type="datetime-local" id="new_date" name="new_date" class="form-control" required>
+                            </div>
+
+                            <div class="text-center mb-4">
+                                <button type="submit" class="btn btn-success btn-lg px-5 py-3">Reschedule</button>
+                            </div>
+
+                            <!-- Back Button to Dashboard -->
+                            <div class="text-center">
+                                <a href="{% url 'accounts:doctor_dashboard' %}" class="btn btn-outline-secondary btn-lg">Back to Dashboard</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

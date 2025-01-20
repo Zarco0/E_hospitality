@@ -1,0 +1,34 @@
+{% extends 'admins/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Appointment Details</h2>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h4 class="card-title mb-3">Patient: {{ appointment.patient.username }}</h4>
+            <p><strong>Doctor:</strong> {{ appointment.doctor.username }}</p>
+            <p><strong>Date:</strong> {{ appointment.date }}</p>
+            <p><strong>Status:</strong> 
+                {% if appointment.status == 'Confirmed' %}
+                <span class="badge bg-success">{{ appointment.status }}</span>
+                {% elif appointment.status == 'Pending' %}
+                <span class="badge bg-warning">{{ appointment.status }}</span>
+                {% else %}
+                <span class="badge bg-danger">{{ appointment.status }}</span>
+                {% endif %}
+            </p>
+            <p><strong>Reason:</strong> {{ appointment.reason }}</p>
+
+            <div class="mt-4">
+                <a href="{% url 'admins:cancel_appointment' appointment.id %}" class="btn btn-danger btn-sm">
+                    <i class="bi bi-x-circle"></i> Cancel Appointment
+                </a>
+                <a href="{% url 'admins:reschedule_appointment' appointment.id %}" class="btn btn-warning btn-sm">
+                    <i class="bi bi-clock"></i> Reschedule Appointment
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'admins/base.html' %}
+{% block content %}
+<h2>Manage Locations</h2>
+<a href="{% url 'admins:add_location' %}" class="btn btn-primary">Add Location</a>
+<table class="table mt-4">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Contact Number</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for location in locations %}
+        <tr>
+            <td>{{ location.name }}</td>
+            <td>{{ location.address }}</td>
+            <td>{{ location.contact_number }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

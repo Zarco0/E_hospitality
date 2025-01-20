@@ -1,0 +1,79 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4 text-primary">Welcome, Admin <b>{{ user.username }}</b>!</h1>
+    <p class="text-center mb-5">Manage the platform's users, facilities, and appointments from here.</p>
+
+    <div class="row">
+        <!-- User Management Card -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <h5 class="card-title text-primary text-center">User Management</h5>
+                    <p class="card-text text-center mb-4">Manage user accounts, roles, and permissions.</p>
+                    <a href="{% url 'admins:list_users' %}" class="btn btn-primary w-100">Go to User Management</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Facility Management Card -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <h5 class="card-title text-primary text-center">Facility Management</h5>
+                    <p class="card-text text-center mb-4">Manage healthcare facilities, departments, and resources.</p>
+                    <a href="{% url 'accounts:facility_management' %}" class="btn btn-primary w-100">Go to Facility Management</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Appointment Management Card -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <h5 class="card-title text-primary text-center">Appointment Management</h5>
+                    <p class="card-text text-center mb-4">Schedule and manage appointments across departments.</p>
+                    <a href="{% url 'admins:appointments_list' %}" class="btn btn-primary w-100">Go to Appointment Management</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistics Section -->
+    <div class="row mt-4">
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <h5 class="card-title text-center text-success">Platform Usage Stats</h5>
+                    <p class="card-text text-center">Here you can view quick stats for the platform.</p>
+                    <!-- Dynamic Stats -->
+                    <ul class="list-group">
+                        <li class="list-group-item">Active Users: {{ active_users }}</li>
+                        <li class="list-group-item">Total Appointments: {{ total_appointments }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <h5 class="card-title text-center text-danger">Recent Activities</h5>
+                    <p class="card-text text-center">View recent activities and updates on the platform.</p>
+                    
+                    <!-- Display Recent User Registrations -->
+                    <ul class="list-group">
+                        <li class="list-group-item active">New Users</li>
+                        {% for user in recent_users %}
+                            <li class="list-group-item">New User Registered: {{ user.username }} ({{ user.date_joined|date:"F j, Y" }})</li>
+                        {% empty %}
+                            <li class="list-group-item">No new users recently.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

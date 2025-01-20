@@ -1,0 +1,31 @@
+{% extends 'admins/base.html' %}
+{% block content %}
+<h2>Manage Resources</h2>
+<a href="{% url 'admins:add_resource' %}" class="btn btn-primary">Add Resource</a>
+<table class="table mt-4">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Department</th>
+            <th>Location</th>
+            <th>Quantity</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for resource in resources %}
+        <tr>
+            <td>{{ resource.name }}</td>
+            <td>{{ resource.department.name }}</td>
+            <td>{{ resource.department.location.name }}</td>
+            <td>{{ resource.quantity }}</td>
+            <td>{{ resource.description }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5" class="text-center text-muted">No resources found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

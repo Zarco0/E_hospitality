@@ -1,0 +1,39 @@
+{% extends 'patients/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <!-- Department Title -->
+    <h2 class="text-center text-primary mb-4">Department: {{ department.name }}</h2>
+    <hr class="mb-4">
+    
+    <!-- Resources Section -->
+    <div class="card shadow-lg">
+        <div class="card-body">
+            <h5 class="card-title text-secondary">Resources in this Department</h5>
+            <hr>
+            {% if department.resources.exists %}
+            <ul class="list-group">
+                {% for resource in department.resources.all %}
+                <li class="list-group-item">
+                    <strong class="text-primary">{{ resource.name }}</strong>  
+                    <span class="badge bg-info text-dark ms-2">Quantity: {{ resource.quantity }}</span>
+                    {% if resource.description %}
+                    <p class="text-muted mt-2">{{ resource.description }}</p>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p class="text-danger">No resources found for this department.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Back Button -->
+    <div class="text-center mt-4">
+        <a href="{% url 'patient:view_facilities' %}" class="btn btn-outline-primary">
+            <i class="bi bi-arrow-left"></i> Back to Facilities
+        </a>
+    </div>
+</div>
+{% endblock %}

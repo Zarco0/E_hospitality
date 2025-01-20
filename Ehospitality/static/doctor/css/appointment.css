@@ -1,0 +1,42 @@
+/* Custom badge styles for appointment status */
+.badge.scheduled-status {
+    background-color: #007bff; /* Blue */
+}
+
+.badge.completed-status {
+    background-color: #28a745; /* Green */
+}
+
+.badge.cancelled-status {
+    background-color: #dc3545; /* Red */
+}
+
+/* Button styling */
+.btn-warning {
+    background-color: #ffac33; /* Custom yellow */
+    border-color: #ffac33;
+}
+
+.btn-danger {
+    background-color: #e3342f; /* Custom red */
+    border-color: #e3342f;
+}
+
+/* Hover effects for action buttons */
+.btn-warning:hover, .btn-danger:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Styling for table rows on hover */
+.table-hover tbody tr:hover {
+    background-color: #f1f1f1; /* Light gray hover effect */
+}
+
+/* Responsive table for mobile view */
+@media (max-width: 768px) {
+    .table-responsive {
+        overflow-x: auto;
+    }
+}

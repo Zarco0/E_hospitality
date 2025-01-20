@@ -1,0 +1,46 @@
+{% extends 'admins/base.html' %}
+{% block content %}
+<div class="container">
+    <h1 class="text-center my-4">Facility Management Dashboard</h1>
+    <div class="row justify-content-center">
+        <!-- Locations Card -->
+        <div class="col-md-4 mb-4">
+            <div class="card text-center">
+                <div class="card-header bg-primary text-white">
+                    <h4>Manage Locations</h4>
+                </div>
+                <div class="card-body">
+                    <p>View and manage all healthcare facility locations.</p>
+                    <a href="{% url 'admins:manage_locations' %}" class="btn btn-outline-primary">Go to Locations</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Departments Card -->
+        <div class="col-md-4 mb-4">
+            <div class="card text-center">
+                <div class="card-header bg-success text-white">
+                    <h4>Manage Departments</h4>
+                </div>
+                <div class="card-body">
+                    <p>View and manage healthcare facility departments.</p>
+                    <a href="{% url 'admins:manage_departments' %}" class="btn btn-outline-success">Go to Departments</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resources Card -->
+        <div class="col-md-4 mb-4">
+            <div class="card text-center">
+                <div class="card-header bg-warning text-white">
+                    <h4>Manage Resources</h4>
+                </div>
+                <div class="card-body">
+                    <p>View and manage resources in the facility.</p>
+                    <a href="{% url 'admins:manage_resources' %}" class="btn btn-outline-warning">Go to Resources</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

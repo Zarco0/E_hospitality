@@ -1,0 +1,67 @@
+{% extends 'patients/base.html' %}
+
+{% block content %}
+
+{% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-danger" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+  <div class="container">
+    <h2>Reschedule Appointment</h2>
+
+    <form method="post">
+      {% csrf_token %}
+      
+      <div class="form-group">
+        <label for="id_doctor">Doctor</label>
+        <select name="doctor" id="id_doctor" class="form-control">
+          <option value="{{ appointment.doctor.id }}" selected>{{ appointment.doctor.username }}</option>
+          {% for doctor in doctors %}
+            <option value="{{ doctor.id }}">{{ doctor.username }}</option>
+          {% endfor %}
+        </select>
+        {% if form.doctor.errors %}
+          <div class="text-danger">
+            {% for error in form.doctor.errors %}
+              <p>{{ error }}</p>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="form-group">
+        <label for="id_date">New Appointment Date and Time</label>
+        <input type="datetime-local" name="date" id="id_date" class="form-control" value="{{ appointment.date|date:"Y-m-d\TH:i" }}" required>
+        {% if form.date.errors %}
+          <div class="text-danger">
+            {% for error in form.date.errors %}
+              <p>{{ error }}</p>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="form-group">
+        <label for="id_reason">Reason for Rescheduling</label>
+        <textarea name="reason" id="id_reason" class="form-control" rows="4" required>{{ appointment.reason }}</textarea>
+        {% if form.reason.errors %}
+          <div class="text-danger">
+            {% for error in form.reason.errors %}
+              <p>{{ error }}</p>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      <button type="submit" class="btn btn-primary">Reschedule Appointment</button>
+    </form>
+
+    <div class="mt-3">
+      <a href="{% url 'accounts:patient_dashboard' %}" class="btn btn-secondary">Back to Dashboard</a>
+    </div>
+  </div>
+{% endblock %}

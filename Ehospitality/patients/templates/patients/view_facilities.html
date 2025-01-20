@@ -1,0 +1,51 @@
+{% extends 'patients/base.html' %}
+
+{% block content %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'patient/css/view_facilities.css' %}">
+
+<div class="container mt-5">
+    <!-- Page Header -->
+    <h2 class="text-center text-primary mb-4">Available Healthcare Facilities</h2>
+    <p class="text-muted text-center">Explore the healthcare facilities available, including departments and contact information.</p>
+    <hr class="mb-4">
+
+    <!-- Accordion for Facilities -->
+    <div class="accordion shadow-lg rounded" id="facilitiesAccordion">
+        {% for location in locations %}
+        <div class="accordion-item">
+            <!-- Accordion Header -->
+            <h2 class="accordion-header" id="heading{{ location.id }}">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ location.id }}" aria-expanded="false" aria-controls="collapse{{ location.id }}">
+                    {{ location.name }}
+                </button>
+            </h2>
+
+            <!-- Accordion Content -->
+            <div id="collapse{{ location.id }}" class="accordion-collapse collapse" aria-labelledby="heading{{ location.id }}" data-bs-parent="#facilitiesAccordion">
+                <div class="accordion-body">
+                    <!-- Location Details -->
+                    <div class="mb-3">
+                        <p><strong>Address:</strong> {{ location.address }}</p>
+                        <p><strong>Contact:</strong> {{ location.contact_number }}</p>
+                    </div>
+
+                    <!-- Departments List -->
+                    <h6 class="text-secondary">Departments:</h6>
+                    <ul class="list-group">
+                        {% for department in location.departments.all %}
+                        <li class="list-group-item">
+                            <a href="{% url 'patient:department_details' department.id %}" class="text-decoration-none text-primary">
+                                {{ department.name }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

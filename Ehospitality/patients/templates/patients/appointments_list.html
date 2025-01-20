@@ -1,0 +1,66 @@
+{% extends 'patients/base.html' %}
+
+{% block content %}
+
+{% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-danger" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center">
+        <h1 class="mb-4">Your Appointments</h1>
+        <a href="{% url 'accounts:patient_dashboard' %}" class="btn btn-outline-primary"><i class="bi bi-arrow-left-short"></i> Dashboard</a>
+    </div>
+
+    {% if appointments %}
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark text-center">
+                <tr>
+                    <th>Doctor</th>
+                    <th>Date & Time</th>
+                    <th>Status</th>
+                    <th>Payment</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody class="text-center">
+                {% for appointment in appointments %}
+                <tr>
+                    <td>{{ appointment.doctor.username }}</td>
+                    <td>{{ appointment.date }}</td>
+                    <td>
+                        <span class="badge 
+                            {% if appointment.status == 'Confirmed' %} bg-success
+                            {% elif appointment.status == 'Pending' %} bg-warning
+                            {% elif appointment.status == 'canceled' %} bg-secondary
+                            {% else %} bg-info {% endif %}">
+                            {{ appointment.status }}
+                        </span>
+                    </td>
+                    <td>
+                        <span class="badge 
+                            {% if appointment.payment_status == 'paid' %} bg-success
+                            {% else %} bg-warning {% endif %}">
+                            {{ appointment.payment_status }}
+                        </span>
+                    </td>
+                    
+                    <td>
+                        <a href="{% url 'patient:cancel_appointment' appointment.id %}" class="btn btn-sm btn-outline-danger">Cancel</a>
+                        <a href="{% url 'patient:reschedule_appointment' appointment.id %}" class="btn btn-sm btn-outline-secondary">Reschedule</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="alert alert-info" role="alert">
+            You have no appointments scheduled.
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

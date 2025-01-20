@@ -1,0 +1,20 @@
+{% extends 'doctors/base.html' %}
+
+{% block content %}
+<h1>Appointment Details</h1>
+
+<div class="card shadow-lg mb-4">
+    <div class="card-body">
+        <h5 class="card-title">Appointment with {{ appointment.patient.username }}</h5>
+        <p><strong>Appointment Time:</strong> {{ appointment.date }}</p>
+        <p><strong>Status:</strong> {{ appointment.status }}</p>
+        <p><strong>Reason:</strong> {{ appointment.reason }}</p>
+        <p><strong>Patient:</strong> {{ appointment.patient.username }}</p>
+        <p><strong>Doctor:</strong> {{ appointment.doctor.username }}</p>
+
+        <a href="{% url 'appointments:edit_appointment' appointment.id %}" class="btn btn-warning btn-sm">Edit</a>
+        <a href="{% url 'appointments:cancel_appointment' appointment.id %}" class="btn btn-danger btn-sm">Cancel</a>
+    </div>
+</div>
+
+{% endblock %}
