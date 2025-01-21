@@ -14,32 +14,33 @@ EHospitality is an integrated platform designed to streamline patient care, admi
 1. Clone the Repository:
    
    git clone https://github.com/username/ehospitality.git
+
    cd ehospitality
    
 
-2. Set Up a Virtual Environment:
+3. Set Up a Virtual Environment:
    
    python3 m venv venv
    source venv/bin/activate   On Windows: venv\Scripts\activate
    
 
-3. Install Dependencies:
+4. Install Dependencies:
    
    pip install r requirements.txt
    
 
-4. Apply Migrations:
+5. Apply Migrations:
    
    python manage.py makemigrations
    python manage.py migrate
    
 
-5. Run the Server:
+6. Run the Server:
    
    python manage.py runserver
    
 
-6. Access the Application:
+7. Access the Application:
    Open your web browser and go to http://127.0.0.1:8000/.
 
  Dependencies
